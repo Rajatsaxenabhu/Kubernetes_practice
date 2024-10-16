@@ -1,0 +1,30 @@
+# init container and sidecar 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  initContainers:
+  - name: init-container  
+    image: busybox
+    command: ['sh','-c','echo Initlizing && sleep 5']
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+---
+#side container
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sidecar-example
+spec:
+  containers:
+  - name: app-container
+    image: nginx
+  - name: log-collector
+    image: busybox
+    command: ['sh', '-c', 'tail -f /var/log/nginx/access.log']

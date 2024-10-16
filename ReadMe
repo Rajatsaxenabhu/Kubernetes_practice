@@ -1,0 +1,20 @@
+Static pod:
+
+    This pod are not manage by schedular but it deploy on control plane node and control plane and manage by kubelet in control manager node.
+
+    If you're building or managing Kubernetes infrastructure or need to ensure critical services are always available on specific nodes, static pods are a valuable tool. 
+
+Taints and Tolerations: 
+
+    Taints prevent pods from being scheduled on specific nodes unless they have matching tolerations, ensuring that only appropriate workloads run on those nodes.
+
+    Tolerations allow pods to be scheduled on nodes with specific taints by tolerating them, bypassing the scheduling restrictions.
+
+    Together, taints and tolerations help control pod placement and node utilization in Kubernetes.
+    
+        operator: Specifies the comparison logic between the key and the taint. Common operators are:
+            Exists: The toleration matches any taint with the specified key, regardless of the value.
+            Equal: The toleration matches only taints with the exact key-value pair.
+
+    Label apply to node:
+         by apply label to node the pod has power to go with which node

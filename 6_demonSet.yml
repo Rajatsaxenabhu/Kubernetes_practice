@@ -1,0 +1,20 @@
+#demonset
+# A DaemonSet ensures that a copy of a specified Pod runs on all (or some) nodes in the cluster. It is useful for running background tasks or services that need to be present on every node, such as monitoring agents, logging collectors, or system maintenance tasks.
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-deployment
+  labels:
+    app: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: monitoring
+  template:
+    metadata:
+      labels:
+        app: monitoring
+    spec:
+      containers:
+      - name: monitoring-agent
+        image: nginx:1.14.2

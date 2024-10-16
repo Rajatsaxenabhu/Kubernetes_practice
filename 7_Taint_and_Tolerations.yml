@@ -1,0 +1,32 @@
+# taint 
+# kubectl taint nodes my-cluster-worker key1=value3:NoSchedule
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  tolerations:
+  - key: "key1"
+    value: "value3"
+    operator: "Equal"
+    effect: "NoSchedule"
+
+# label is also used in production 
+# kubectl label nodes my-cluster-worker key1=value3
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  nodeSelector:
+    key1: value2
