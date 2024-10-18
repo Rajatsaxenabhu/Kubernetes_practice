@@ -8,5 +8,3 @@ nodes:
     hostPort: 30001
     listenAddress: 0.0.0.0
 - role: worker
-- role: worker
-- role: worker

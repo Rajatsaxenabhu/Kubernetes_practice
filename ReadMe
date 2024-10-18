@@ -18,3 +18,36 @@ Taints and Tolerations:
 
     Label apply to node:
          by apply label to node the pod has power to go with which node
+    
+Scaling:
+    Horizontal Scaling (Kubernetes HPA):>{scale out/in}
+        Method	Increases number of pod replicas.
+        Web server scaling during peak traffic.
+
+    Vertical Scaling (Kubernetes VPA):{scale up/down}
+        Increases CPU/memory resources per pod.
+        Database needing more CPU or memory.
+    
+    cluster Scaling
+
+Health probes:
+    liveless:
+        Used to determine if a container is still alive (i.e., it hasn't crashed or become stuck).
+       
+        If the liveness probe fails, Kubernetes will restart the container.
+    
+    readiness:
+        Used to determine if a container is ready to start accepting traffic.
+        
+        If the readiness probe fails, Kubernetes will temporarily remove the pod from 
+        the list of endpoints until it passes the probe.
+        
+        Useful for applications that need time to initialize or load data before they can handle requests.
+
+
+
+
+-----------------------------------
+
+node affimity
+request and limits 

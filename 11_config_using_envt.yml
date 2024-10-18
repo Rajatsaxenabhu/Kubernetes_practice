@@ -1,0 +1,17 @@
+#using the envt variable 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    env:
+    - name: Rajat
+      value: "Rajat saxena"
+    command: ["/bin/sh", "-c", "sleep 3600"]
+
+---
