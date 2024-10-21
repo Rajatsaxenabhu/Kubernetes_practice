@@ -1,0 +1,12 @@
+# create the certificate 
+# openssl genrsa -out Rajat.key 2048
+# openssl req -new -key Rajat.key -out Rajat.csr -subj "/CN=adam"
+kind: CertificateSigningRequest
+metadata:
+  name: rajat
+spec:
+  request: $(cat Rajat.csr | base64 | tr -d '\n')
+  signerName: kubernetes.io/kube-apiserver-client
+  expirationSeconds: 3600
+  usages:
+  - client auth
