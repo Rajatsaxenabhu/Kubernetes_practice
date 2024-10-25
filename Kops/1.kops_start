@@ -1,0 +1,16 @@
+# kops start
+###   generate the ssh key
+
+ssh-keygen
+cd .ssh/
+ls -al
+
+---
+#install the kops
+cd
+cd /usr/local/bin
+sudo wget  https://github.com/kubernetes/kops/releases/download/v1.30.0/kops-linux-amd64
+sudo ls -al
+sudo mv kops-linux-amd64 kops
+sudo chmod 777
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"

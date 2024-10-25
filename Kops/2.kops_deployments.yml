@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gamedeploy
+  labels:
+    app: game
+spec:
+  replicas: 4
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: game
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:                   # its for pod 
+    metadata:
+      labels:
+        app: game
+    spec:
+      containers:
+      - name: game
+        image: saxenarajat499/kubegame:v1
+        ports:
+        - containerPort: 80
+
