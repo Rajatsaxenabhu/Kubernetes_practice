@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: development
+  labels:
+    app: development
+
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: development
+  namespace: development
+spec:
+  hard:
+    requests.cpu: "1000m"
+    requests.memory: 1Gi
+    limits.cpu: "2000m"
+    limits.memory: 2Gi
+    pods: "2"
+    replicationcontrollers: "2"
+    services: "2"  
+
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: development-cpu
+  namespace: development
+spec:
+  limits:
+  - max:
+      cpu: "200m"
+      memory: 128Mi
+    min:
+      cpu: "100m"
+      memory: 100Mi
+    type: Container

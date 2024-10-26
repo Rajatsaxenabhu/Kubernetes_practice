@@ -1,0 +1,26 @@
+# kubectl create deployments app1 --image saxenarajat499/testing:worker --replicas 5 --dry-run -o yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app1
+  name: app1
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: app1
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: app1
+    spec:
+      containers:
+      - image: saxenarajat499/testings:worker
+        name: testings
+      imagePullSecrets:
+        - name: docker-psd
+  
+

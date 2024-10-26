@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sidecar-container
+  labels:
+    app: sidecar
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: sidecar
+  template:
+    metadata:
+      labels:
+        app: sidecar
+    spec:
+      initContainers:
+      - name: wait-for-service
+        image: busybox
+        command: ['sh', '-c', 'until nslookup myservice.default.svc.cluster.local; do sleep 10; done']
+      - name : task-write
+        image: busybox  
+        command: ['sh', '-c', 'echo "task write" > /task/task.txt; sleep 10;']
+      containers:
+      - name: main-container
+        image: busybox
+        command: ['sh', '-c', 'while true; do echo "main container"; sleep 10; done']
+        volumeMounts:
+        - name: tak-volume
+          mountPath: /task
+      volumes:
+      - name: tak-volume
+        emptyDir: {}

@@ -1,0 +1,25 @@
+install certbot
+
+sudo snap install --classic certbot
+
+certbot certonly --manual --perferred-challenges=dns --key-type rsa --email saxenarajat499@gmail.com \
+--server https://acme-v02.api.letsencrypt.org/directory --agree-tos -d *.kalkii.xyz
+
+
+
+# after the certificate varify
+cd /tmp/
+nano tls.crt # paste the certificate
+nano tls.key # paste the key
+
+# verify certificate
+kubectl create secret tls nginx-tls-default --cert="tls.crt" --key="tls.key"
+
+# ingress
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.0-beta.0/deploy/static/provider/aws/deploy.yaml
+
+# docker secret token
+kubectl create secret docker-registry docker-pwd \
+--docker-server=docker.io --docker-username=saxenarajat499 \
+--docker-password=dckr_pat_9dWXCCPPyRYvpJrfTAHDb84xj_g \
+--docker-email=H8n0M@example.com

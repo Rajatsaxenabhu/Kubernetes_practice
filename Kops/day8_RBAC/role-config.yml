@@ -1,0 +1,19 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: userd-role
+  namespace: developments
+rules:
+  - apiGroups: ["",apps,"network.k8s.io"]
+    resources: ["pods","deployments","nodes"]
+    verbs: ["get","update","list"]
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: userp-role
+  namespace: production
+rules:
+  - apiGroups: ["",apps,"network.k8s.io"]
+    resources: ["pods","deployments","nodes"]
+    verbs: ["get","update","list","delete"]
